@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Happy Birthday 💜</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#ffe6f9" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --pink: #ffe6f9;
+        --lav: #e8e6ff;
+        --glass-bg: rgba(255, 255, 255, 0.12);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, var(--pink), var(--lav));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        color: #1b1220;
+      }
+      .whatsapp {
+        position: fixed;
+        top: 14px;
+        right: 14px;
+        background: #25d366;
+        color: white;
+        padding: 10px 14px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 700;
+      }
+
+      .box {
+        width: 95%;
+        max-width: 460px;
+        background: var(--glass-bg);
+        padding: 28px;
+        border-radius: 16px;
+        text-align: center;
+        backdrop-filter: blur(6px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      }
+
+      h1 {
+        font-size: 26px;
+        font-weight: 700;
+      }
+
+      .birthday-msg {
+        font-size: 16px;
+        margin-top: 10px;
+      }
+
+      #responseBox {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      button {
+        background: linear-gradient(180deg, #ffd6f0, #ff9fe6);
+        border: none;
+        padding: 12px 22px;
+        font-size: 17px;
+        font-weight: 700;
+        border-radius: 12px;
+        margin: 6px;
+        cursor: pointer;
+      }
+
+      .utility-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        gap: 10px;
+      }
+
+      .mini-btn {
+        background: #fff;
+        color: #6a295e;
+        border: 1px solid #e4b0d8;
+        padding: 8px 14px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .genz-info {
+        margin-top: 22px;
+        font-size: 14px;
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.18);
+        border-radius: 16px;
+        line-height: 1.6;
+      }
+
+      .emoji {
+        position: fixed;
+        top: -5vh;
+        font-size: 28px;
+        animation: fall linear forwards;
+        pointer-events: none;
+        z-index: 1000;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(120vh);
+        }
+      }
+
+      #installBtn {
+        display: none;
+        background: #fff5fc;
+        border: 2px solid #ff9fe6;
+        padding: 12px;
+        border-radius: 14px;
+        margin-top: 20px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a
+      class="whatsapp"
+      href="https://wa.me/916350394711?text=Hi%20Lucky%20💜"
+      target="_blank"
+      >WhatsApp 💬</a
+    >
+
+    <div class="box">
+      <h1>Happy Birthday to You 🎉💜</h1>
+      <p class="birthday-msg">
+        Aaj ka din sirf aapka hai… aur ye chhota sa surprise bhi 🎁
+      </p>
+
+      <button id="yesBtn">Open Surprise 🎁</button>
+      <button id="noBtn">Maybe Later ❌</button>
+
+      <div id="responseBox"></div>
+
+      <div class="genz-info">
+        <b style="font-size: 16px">🔐 A small note…</b><br />
+        Purane boring card ko chhodo — yeh naya full‑vibe web surprise try karo.
+        <br />
+        Yeh page specially <b>aap dono</b> ke liye hai: private, cute aur bilkul
+        safe. <br />
+        Send karo ek secret message, personalized birthday wish ya ek emotional
+        sorry note — <b>sirf aap dono</b> dhekh paoge. <br /><br />
+        <i style="opacity: 0.9"
+          >(Koi third person, koi app tracking, sirf real feelings and
+          vibes.)</i
+        ><br /><br />
+        Agar chaho main isko aapke liye customize karke personal animations aur
+        ek "Open Gift" animation bhi add kar dunga. <br />
+        Bas WhatsApp pe bolo:
+        <b>“Mujhe ek custom surprise page banana hai 🫶”</b>
+      </div>
+
+      <div class="utility-buttons">
+        <button class="mini-btn" id="saveContactBtn">Save Contact ❤️</button>
+        <button class="mini-btn" id="whatsappDirect">
+          Message Template 💬
+        </button>
+        <button class="mini-btn" id="calendarBtn">Set Reminder ⏰</button>
+      </div>
+
+      <button id="installBtn">Add to Home Screen 📲</button>
+    </div>
+
+    <audio id="birthdayMusic" loop>
+      <source src="birthday.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      const yesBtn = document.getElementById("yesBtn");
+      const noBtn = document.getElementById("noBtn");
+      const responseBox = document.getElementById("responseBox");
+      const birthdayMusic = document.getElementById("birthdayMusic");
+      // const birthdayMusic = document.getElementById("birthdayMusic");
+      //const birthdayMusic = document.getElementById("birthdayMusic");
+
+      function emojiRain() {
+        const emojis = ["🎉", "🎁", "💜", "✨", "🎂"];
+        setInterval(() => {
+          const e = document.createElement("div");
+          e.classList.add("emoji");
+          e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+          e.style.left = Math.random() * 100 + "vw";
+          e.style.animationDuration = Math.random() * 2 + 3 + "s";
+          document.body.appendChild(e);
+          setTimeout(() => e.remove(), 5000);
+        }, 260);
+      }
+
+      yesBtn.addEventListener("click", () => {
+        birthdayMusic.play();
+        responseBox.innerHTML = `🎁 Your Birthday Surprise 💜<br><br>
+        Tumhari smile sabse special gift hai… aur ye page sirf tumhare liye banaya gaya hai. <br><br>
+        Instagram: <b>vinaydailylife</b>`;
+        emojiRain();
+      });
+
+      noBtn.addEventListener("click", () => {
+        birthdayMusic.play();
+        responseBox.innerHTML = `Koi baat nahi 💜<br>Aap jab ready ho tab surprise open kar lena 🎁`;
+      });
+
+      // Save Contact
+      document
+        .getElementById("saveContactBtn")
+        .addEventListener("click", () => {
+          const vcfData = `BEGIN:VCARD\nVERSION:3.0\nFN:Lucky Surprise Planner\nTEL:+916350394711\nEND:VCARD`;
+          const blob = new Blob([vcfData], { type: "text/vcard" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "Lucky.vcf";
+          a.click();
+        });
+
+      // WhatsApp Template
+      document
+        .getElementById("whatsappDirect")
+        .addEventListener("click", () => {
+          window.open(
+            "https://wa.me/916350394711?text=Hi%20Lucky%20💜%0AI%20want%20a%20birthday%20surprise%20page%20🎁",
+            "_blank"
+          );
+        });
+
+      // Calendar Reminder
+      document.getElementById("calendarBtn").addEventListener("click", () => {
+        const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:Wish Someone Happy Birthday 🎂💜\nDTSTART:20251201T090000\nEND:VEVENT\nEND:VCALENDAR`;
+        const blob = new Blob([ics], { type: "text/calendar" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "BirthdayReminder.ics";
+        a.click();
+      });
+    </script>
+  </body>
+</html>
